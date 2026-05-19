@@ -48,9 +48,9 @@ if submit_button and user_input.strip():
             
             """
 
-            st.markdown(markdown_content)
+            st.markdown(markdown_content) 
         else:
             st.error("Bot failed to respond:" + response.txt)
 
     except Exception as e:
-        raise f"The response failed due to {e}"
+        raise Exception(f"The response failed due to {e}")

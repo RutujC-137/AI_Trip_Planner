@@ -11,7 +11,7 @@ class WeatherForecastTool:
         try:
             url = f"{self.base_url}/weather"
             params={
-                "q":place.
+                "q":place,
                 "appid":self.api_key,
             }
             response = requests.get(url, params= params)
@@ -24,32 +24,17 @@ class WeatherForecastTool:
         """Get weather forecast of a place """
         try:
             url = f"{self.base_url}/forecast"
-            param = {
+            params = {
                 "q": place,
                 "appid":self.api_key,
                 "cnt":10,
                 "units":"metric"
             }
 
-            response = requests.get(url,params=params)
+            response = requests.get(url, params= params)
             return response.json() if response.status_code == 200 else {}
         except Exception as e:
             raise e 
 
 
-        def get_forecast_weather(self,place:str):
-            '''get weather forecast of a place '''
-            try:
-                url= f"{self.base_url}/forecast"
-                params = {
-                    "q":place,
-                    "appid": self.api_key,
-                    "cnt":10,
-                    "units": "metric"
-                }
-                response = requests.get(url, params=params)
-                return response.json() if response.status_code ==200 else {}
-            except Exception as e:
-                raise e 
-
-        
+       

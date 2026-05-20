@@ -15,3 +15,5 @@
 ```uv pip list```
 ```uv pip install langchain```
 ```doskey/history```
+
+```uvicorn main:app --reload --port 8000```

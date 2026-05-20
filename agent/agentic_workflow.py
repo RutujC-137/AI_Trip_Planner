@@ -13,20 +13,20 @@ from tools.currency_conversion_tool import CurrencyConverterTool
 
 class GraphBuilder():
     def __init__(self, model_provider: str = "groq"):
-        self.model_loader = ModelLoader(model_provider= self.model_loader)
+        self.model_loader = ModelLoader(model_provider=model_provider)
         self.llm = self.model_loader.load_llm()
 
         self.tools=[]
 
         self.weather_tools = WeatherInfoTool()
         self.place_search_tools = PlaceSearchTool()
-        self.Calculator_tools = self.Calculator_tools()
+        self.calculator_tools = CalculatorTool()
         self.currency_converter_tools = CurrencyConverterTool()
 
 
         self.tools.extend([* self.weather_tools.weather_tool_list,
                            * self.place_search_tools.place_search_tool_list,
-                           * self.Calculator_tools.calculator_tool_list,
+                           * self.calculator_tools.calculator_tool_list,
                            * self.currency_converter_tools.currency_converter_tool_list    
         ])
 
@@ -41,7 +41,7 @@ class GraphBuilder():
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
         response = self.llm_with_tools.invoke(input_question)
-        return {"message":[response]}
+        return {"messages":[response]}
 
     def build_graph(self):
         graph_builder=StateGraph(MessagesState)

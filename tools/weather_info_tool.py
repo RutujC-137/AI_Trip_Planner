@@ -12,7 +12,7 @@ class WeatherInfoTool:
         self.weather_service = WeatherForecastTool(self.api_key)
         self.weather_tool_list= self._setup_tools()
     
-    def _setup_tool(self)-> List:
+    def _setup_tools(self)-> List:
         """Setup all tools for the weather forecast tool"""
         @tool
         def get_current_weather(city:str)-> str:
@@ -27,13 +27,13 @@ class WeatherInfoTool:
         @tool
         def get_weather_forecast(city:str)->str:
             """Get weather forecast for the city """
-            forecast_data = self.weather_service.get_weather_forecast_weather(city)
+            forecast_data = self.weather_service.get_forecast_weather(city)            
             if forecast_data and 'list' in forecast_data:
                 forecast_summary = []
 
                 for i in range(len(forecast_data['list'])):
                     item = forecast_data['list'][i]
-                    date = item['dt.txt'].split(' ')[0]
+                    date = item['dt_txt'].split(' ')[0]
                     temp = item['main']['temp']
                     desc = item['weather'][0]['description']
                     forecast_summary.append(f"{date}:{temp} degree celcius, {desc}")

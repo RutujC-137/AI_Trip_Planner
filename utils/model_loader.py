@@ -20,7 +20,7 @@ class ConfigLoader:
         return self.config[key]
 
 
-class ModelLoader:
+class ModelLoader(BaseModel):
     model_provider: Literal["groq", "openai"] = "groq"
     config: Optional[ConfigLoader] =  Field(default=None, exclude=True)
 
